@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import CategoryStamp from "./CategoryStamp.jsx";
 import { categoryMeta } from "../categories.js";
 import { api } from "../api.js";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function PlaceDetailModal({ place, onClose }) {
   const [duree, setDuree] = useState(place.duree_visite_estimee_min ?? null);
   const [activePhoto, setActivePhoto] = useState(0);
-  const meta = categoryMeta(place.categorie);
+  const { language, strings } = useLanguage();
+  const meta = categoryMeta(place.categorie, language);
   const photos = place.photos?.length ? place.photos : place.photo_url ? [place.photo_url] : [];
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function PlaceDetailModal({ place, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Fermer">
+        <button className="modal-close" onClick={onClose} aria-label={strings.close}>
           ×
         </button>
 
@@ -47,14 +49,14 @@ export default function PlaceDetailModal({ place, onClose }) {
                   <button
                     className="modal-gallery__nav modal-gallery__nav--prev"
                     onClick={() => setActivePhoto((i) => (i - 1 + photos.length) % photos.length)}
-                    aria-label="Photo precedente"
+                    aria-label={strings.prevPhoto}
                   >
                     ‹
                   </button>
                   <button
                     className="modal-gallery__nav modal-gallery__nav--next"
                     onClick={() => setActivePhoto((i) => (i + 1) % photos.length)}
-                    aria-label="Photo suivante"
+                    aria-label={strings.nextPhoto}
                   >
                     ›
                   </button>
@@ -77,7 +79,7 @@ export default function PlaceDetailModal({ place, onClose }) {
                   key={url}
                   className={`modal-gallery__thumb ${i === activePhoto ? "modal-gallery__thumb--active" : ""}`}
                   onClick={() => setActivePhoto(i)}
-                  aria-label={`Photo ${i + 1}`}
+                  aria-label={strings.photoN(i + 1)}
                 >
                   <img src={url} alt="" />
                 </button>
@@ -97,7 +99,9 @@ export default function PlaceDetailModal({ place, onClose }) {
               {meta.label}
             </span>
             {place.note != null && <span className="stat-pill">★ {place.note.toFixed(1)}</span>}
-            <span className="stat-pill">{duree != null ? `~${duree} min de visite` : "durée…"}</span>
+            <span className="stat-pill">
+              {duree != null ? strings.visitDuration(duree) : strings.visitDurationLoading}
+            </span>
             <span className="stat-pill">
               {place.latitude.toFixed(4)}, {place.longitude.toFixed(4)}
             </span>

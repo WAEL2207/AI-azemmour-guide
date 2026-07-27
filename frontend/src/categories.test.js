@@ -10,8 +10,26 @@ describe("categories", () => {
     expect(CATEGORY_ORDER).toHaveLength(10);
   });
 
-  it("returns label + color for a known category", () => {
+  it("has both fr and en labels for every category", () => {
+    for (const cat of CATEGORY_ORDER) {
+      expect(CATEGORY_META[cat].label.fr).toBeTruthy();
+      expect(CATEGORY_META[cat].label.en).toBeTruthy();
+    }
+  });
+
+  it("returns the french label by default", () => {
     expect(categoryMeta("hotel")).toEqual({ label: "Hotel", color: "var(--cat-hotel)" });
+  });
+
+  it("returns the english label when asked", () => {
+    expect(categoryMeta("religieux", "en")).toEqual({
+      label: "Religious site",
+      color: "var(--cat-religieux)",
+    });
+  });
+
+  it("falls back to french if a translation is somehow missing", () => {
+    expect(categoryMeta("hotel", "de")).toEqual({ label: "Hotel", color: "var(--cat-hotel)" });
   });
 
   it("falls back gracefully for an unknown category", () => {

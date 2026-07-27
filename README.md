@@ -13,6 +13,9 @@ Chaque lieu peut avoir une ou plusieurs vraies photos (galerie avec navigation) 
 tant qu'aucune photo n'est ajoutee, un **"tampon"** colore par categorie sert de
 repli visuel (voir section "Photos" plus bas).
 
+L'interface est disponible en **francais et en anglais** (bouton FR/EN en haut a
+droite de l'entete, choix retenu d'une visite a l'autre).
+
 ## Structure
 
 ```
@@ -44,9 +47,14 @@ webapp/
     src/
       App.jsx
       api.js                 client HTTP vers le backend
-      categories.js          couleurs/libelles des 10 categories
+      categories.js          couleurs/libelles des 10 categories (FR + EN)
+      i18n/
+        strings.js             dictionnaire de chaines UI FR/EN
+        placeTranslations.js   traductions EN du nom/description des lieux
+        LanguageContext.jsx    contexte React (langue courante, persistee en localStorage)
       components/
         ErrorBoundary.jsx    filet de securite : evite une page blanche en cas de crash
+        LanguageToggle.jsx   bouton FR/EN
       *.test.js(x)           tests (Vitest + React Testing Library), a cote du code teste
 ```
 
@@ -167,6 +175,17 @@ de repli au lieu d'une page blanche (le header/la nav restent utilisables).
 Choisis les categories de lieux qui t'interessent, l'app genere un itineraire
 ordonne (plus proche voisin) avec duree de visite + duree de trajet estimees
 entre chaque etape.
+
+### Langue (FR/EN)
+Bouton FR/EN en haut a droite de l'entete, visible sur les deux onglets. Traduit
+l'interface entiere ainsi que le nom et la description des lieux affiches. Le
+backend (`places_store.json`) reste la source de verite en francais ; les
+traductions anglaises vivent uniquement cote frontend
+(`frontend/src/i18n/placeTranslations.js`), indexees par `id` de lieu - si un
+nouveau lieu est ajoute sans entree correspondante, son nom/sa description
+restent simplement affiches en francais meme en mode EN (pas de crash, juste un
+repli silencieux). Les rares messages d'erreur renvoyes par le backend (ex:
+"Lieu introuvable.") restent en francais dans les deux modes.
 
 ## Endpoints API
 

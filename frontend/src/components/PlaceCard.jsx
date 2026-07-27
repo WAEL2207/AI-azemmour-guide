@@ -1,8 +1,10 @@
 import CategoryStamp from "./CategoryStamp.jsx";
 import { categoryMeta } from "../categories.js";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
 
 export default function PlaceCard({ place, onClick, style }) {
-  const meta = categoryMeta(place.categorie);
+  const { language, strings } = useLanguage();
+  const meta = categoryMeta(place.categorie, language);
   return (
     <button className="place-card" onClick={onClick} style={style}>
       <div className="place-card__photo">
@@ -25,7 +27,7 @@ export default function PlaceCard({ place, onClick, style }) {
         <p className="place-card__desc">{place.description}</p>
         <div className="place-card__meta">
           <span style={{ color: meta.color }}>{meta.label}</span>
-          <span>{place.note != null ? `★ ${place.note.toFixed(1)}` : "sans note"}</span>
+          <span>{place.note != null ? `★ ${place.note.toFixed(1)}` : strings.noRating}</span>
         </div>
       </div>
     </button>

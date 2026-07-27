@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import PlaceCard from "./PlaceCard.jsx";
+import { LanguageProvider } from "../i18n/LanguageContext.jsx";
 
 const BASE_PLACE = {
   id: 1,
@@ -11,21 +12,27 @@ const BASE_PLACE = {
   photo_url: null,
 };
 
+function renderCard(props) {
+  return render(
+    <LanguageProvider>
+      <PlaceCard {...props} />
+    </LanguageProvider>
+  );
+}
+
 describe("PlaceCard", () => {
   it("shows the category stamp placeholder when there is no photo", () => {
-    render(<PlaceCard place={BASE_PLACE} onClick={() => {}} />);
+    renderCard({ place: BASE_PLACE, onClick: () => {} });
     expect(screen.getByText("Medina d'Azemmour")).toBeInTheDocument();
     expect(document.querySelector(".stamp")).toBeInTheDocument();
     expect(document.querySelector(".place-card__image")).not.toBeInTheDocument();
   });
 
   it("shows the photo plus rating badge and category chip when a photo exists", () => {
-    render(
-      <PlaceCard
-        place={{ ...BASE_PLACE, photo_url: "/static/photos/1/1.jpg" }}
-        onClick={() => {}}
-      />
-    );
+    renderCard({
+      place: { ...BASE_PLACE, photo_url: "/static/photos/1/1.jpg" },
+      onClick: () => {},
+    });
     expect(screen.getByRole("img", { name: "Medina d'Azemmour" })).toHaveAttribute(
       "src",
       "/static/photos/1/1.jpg"
@@ -36,14 +43,14 @@ describe("PlaceCard", () => {
     expect(document.querySelector(".place-card__category-chip")).toHaveTextContent("Monument");
   });
 
-  it("shows 'sans note' when the place has no rating", () => {
-    render(<PlaceCard place={{ ...BASE_PLACE, note: null }} onClick={() => {}} />);
+  it("shows the localized 'no rating' text when the place has no rating", () => {
+    renderCard({ place: { ...BASE_PLACE, note: null }, onClick: () => {} });
     expect(screen.getByText("sans note")).toBeInTheDocument();
   });
 
   it("calls onClick when clicked", () => {
     const onClick = vi.fn();
-    render(<PlaceCard place={BASE_PLACE} onClick={onClick} />);
+    renderCard({ place: BASE_PLACE, onClick });
     fireEvent.click(screen.getByRole("button"));
     expect(onClick).toHaveBeenCalledTimes(1);
   });

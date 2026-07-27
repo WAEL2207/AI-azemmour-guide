@@ -3,6 +3,8 @@ import { api } from "../api.js";
 import PlaceCard from "./PlaceCard.jsx";
 import PlaceDetailModal from "./PlaceDetailModal.jsx";
 import { CATEGORY_ORDER, categoryMeta } from "../categories.js";
+import { useLanguage } from "../i18n/LanguageContext.jsx";
+import { translatePlace } from "../i18n/placeTranslations.js";
 
 export default function PlacesExplorer() {
   const [places, setPlaces] = useState([]);
@@ -10,6 +12,7 @@ export default function PlacesExplorer() {
   const [error, setError] = useState(null);
   const [activeCategorie, setActiveCategorie] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const { language, strings } = useLanguage();
 
   function reload() {
     setLoading(true);
@@ -22,16 +25,23 @@ export default function PlacesExplorer() {
 
   useEffect(reload, []);
 
-  const visible = activeCategorie
-    ? places.filter((p) => p.categorie === activeCategorie)
-    : places;
+  const displayPlaces = places.map((p) => translatePlace(p, language));
 
-  const availableCategories = [...new Set(places.map((p) => p.categorie))].sort(
+  const visible = activeCategorie
+    ? displayPlaces.filter((p) => p.categorie === activeCategorie)
+    : displayPlaces;
+
+  const availableCategories = [...new Set(displayPlaces.map((p) => p.categorie))].sort(
     (a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b)
   );
 
-  if (loading) return <p className="loading-dots">Chargement des lieux…</p>;
-  if (error) return <div className="error-banner">Impossible de charger les lieux : {error}</div>;
+  if (loading) return <p className="loading-dots">{strings.loadingPlaces}</p>;
+  if (error)
+    return (
+      <div className="error-banner">
+        {strings.loadErrorPrefix} {error}
+      </div>
+    );
 
   return (
     <div>
@@ -42,11 +52,11 @@ export default function PlacesExplorer() {
             style={activeCategorie === null ? { background: "var(--color-ink)", color: "#fff" } : {}}
             onClick={() => setActiveCategorie(null)}
           >
-            Tous ({places.length})
+            {strings.filterAll} ({displayPlaces.length})
           </button>
           {availableCategories.map((cat) => {
-            const meta = categoryMeta(cat);
-            const count = places.filter((p) => p.categorie === cat).length;
+            const meta = categoryMeta(cat, language);
+            const count = displayPlaces.filter((p) => p.categorie === cat).length;
             const active = activeCategorie === cat;
             return (
               <button
@@ -64,8 +74,8 @@ export default function PlacesExplorer() {
 
       {visible.length === 0 ? (
         <div className="empty-state">
-          <p className="empty-state__title">Aucun lieu ici</p>
-          <p>Essaie une autre categorie.</p>
+          <p className="empty-state__title">{strings.emptyTitle}</p>
+          <p>{strings.emptyText}</p>
         </div>
       ) : (
         <div className="places-grid">
