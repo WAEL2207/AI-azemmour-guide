@@ -31,11 +31,11 @@ export const STRINGS = {
     summaryTravelTime: "Temps de trajet",
     summaryTotalTime: "Duree totale",
     travelNote: (km, min) => `→ ${km} km · ${min} min de trajet`,
-    footerText: (year) => `© ${year} Azemmour Guide · Cree avec React, Flask et un soupcon d'IA.`,
+    footerText: (year) => `© ${year} Azemmour Guide · Propulsé par l'IA.`,
   },
   en: {
     eyebrow: "AI travel guide",
-    titleSuffix: ", uncovered",
+    titleSuffix: ", to discover",
     subtitle:
       "Discover the finest spots in the medina and beyond, and easily build your ideal visit itinerary.",
     badgeItineraries: "🗺️ Tailor-made itineraries",
@@ -63,6 +63,6 @@ export const STRINGS = {
     summaryTravelTime: "Travel time",
     summaryTotalTime: "Total duration",
     travelNote: (km, min) => `→ ${km} km · ${min} min travel`,
-    footerText: (year) => `© ${year} Azemmour Guide · Built with React, Flask and a touch of AI.`,
+    footerText: (year) => `© ${year} Azemmour Guide · Powered by AI.`,
   },
 };

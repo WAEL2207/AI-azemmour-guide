@@ -24,8 +24,7 @@ const PLACE_TRANSLATIONS_EN = {
   },
   6: {
     nom: "El Haouzia Beach",
-    description:
-      "Large fine-sand beach bordered by a forest, popular for surfing, windsurfing and kitesurfing.",
+    description: "Large fine-sand beach bordered by a forest, known for surfing and walks.",
   },
   7: {
     nom: "Azemmour Corniche",
