@@ -901,3 +901,23 @@ select {
   color: var(--color-ink-soft);
   font-size: 13px;
 }
+
+.error-boundary {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+.error-boundary__title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--color-ink);
+  margin: 0 0 8px;
+}
+
+.error-boundary__text {
+  color: var(--color-ink-soft);
+  margin: 0 0 20px;
+}

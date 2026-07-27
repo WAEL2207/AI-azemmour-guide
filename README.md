@@ -23,10 +23,13 @@ webapp/
     sklearn_compat.py      shim de compatibilite scikit-learn (voir plus bas)
     requirements.txt       dependances pour lancer l'app
     requirements-notebooks.txt   dependances additionnelles pour reentrainer les modeles
+    requirements-test.txt        dependance additionnelle pour lancer les tests (pytest)
+    conftest.py             config pytest (sys.path)
+    tests/
+      test_app.py             tests de tous les endpoints de l'API
     models/
       model_classification.joblib
       model_regression_duree.joblib
-      _backup_original/         sauvegarde des tout premiers modeles (avant reentrainement)
     notebooks/              notebooks Jupyter pour (re)entrainer les 2 modeles
       train_classification_model.ipynb
       train_regression_model.ipynb
@@ -43,6 +46,8 @@ webapp/
       api.js                 client HTTP vers le backend
       categories.js          couleurs/libelles des 10 categories
       components/
+        ErrorBoundary.jsx    filet de securite : evite une page blanche en cas de crash
+      *.test.js(x)           tests (Vitest + React Testing Library), a cote du code teste
 ```
 
 ## Lancer le backend
@@ -133,11 +138,30 @@ installee. Deux solutions :
    meme avec une version differente ; il est importe automatiquement par
    `ml_service.py`.
 
+## Tests
+
+**Backend** (pytest, teste les vrais endpoints Flask avec les vrais modeles/donnees) :
+
+```bash
+cd backend
+pip install -r requirements-test.txt
+pytest
+```
+
+**Frontend** (Vitest + React Testing Library) :
+
+```bash
+cd frontend
+npm test
+```
+
 ## Fonctionnalites
 
 ### Explorer
 Grille des lieux d'Azemmour, filtrable par categorie. Clique sur un lieu pour
 voir sa galerie photo, sa description complete et sa duree de visite estimee.
+Si un composant plante pendant le rendu, un `ErrorBoundary` affiche un message
+de repli au lieu d'une page blanche (le header/la nav restent utilisables).
 
 ### Itineraire
 Choisis les categories de lieux qui t'interessent, l'app genere un itineraire

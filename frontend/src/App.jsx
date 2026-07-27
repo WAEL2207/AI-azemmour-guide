@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PlacesExplorer from "./components/PlacesExplorer.jsx";
 import ItineraryPlanner from "./components/ItineraryPlanner.jsx";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 const TABS = [
   { id: "explorer", label: "Explorer" },
@@ -41,8 +42,10 @@ export default function App() {
         ))}
       </nav>
 
-      {tab === "explorer" && <PlacesExplorer />}
-      {tab === "itineraire" && <ItineraryPlanner />}
+      <ErrorBoundary key={tab}>
+        {tab === "explorer" && <PlacesExplorer />}
+        {tab === "itineraire" && <ItineraryPlanner />}
+      </ErrorBoundary>
     </div>
   );
 }

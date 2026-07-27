@@ -1,0 +1,3 @@
+# Dependance additionnelle pour lancer la suite de tests (backend/tests/).
+# Non requise pour lancer l'app Flask.
+pytest==9.1.1

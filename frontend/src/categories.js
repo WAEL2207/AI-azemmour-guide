@@ -1,4 +1,4 @@
-// Metadonnees partagees pour les 7 categories de lieux.
+// Metadonnees partagees pour les 10 categories de lieux.
 // Chaque categorie a une couleur (utilisee pour le "tampon" qui remplace
 // la photo tant qu'aucune vraie image n'est disponible) et un libelle FR.
 
