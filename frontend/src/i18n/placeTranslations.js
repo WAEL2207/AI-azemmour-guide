@@ -36,7 +36,7 @@ const PLACE_TRANSLATIONS_EN = {
       "Whitewashed arcaded building housing local artisans, notably Azemmour's traditional embroidery.",
   },
   9: {
-    nom: "Abderrahmane Rahoule Art Gallery",
+    nom: "El Hani Mohamed Art's Gallery",
     description: "Contemporary art exhibition space located in the medina.",
   },
   10: {
@@ -60,11 +60,6 @@ const PLACE_TRANSLATIONS_EN = {
   14: {
     nom: "Honey House",
     description: "Friendly restaurant serving Moroccan cuisine and pizzas, well loved for its warm welcome.",
-  },
-  19: {
-    nom: "Portuguese Church",
-    description:
-      "Remnant of the Portuguese presence in Azemmour, a fascinating historical landmark tucked into the medina's alleys.",
   },
   22: {
     nom: "Medina Murals",

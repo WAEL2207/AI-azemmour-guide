@@ -85,7 +85,7 @@
   },
   {
     "id": 9,
-    "nom": "Galerie d'art Abderrahmane Rahoule",
+    "nom": "El Hani Mohamed Art's Gallery",
     "categorie": "art",
     "description": "Espace d'exposition d'art contemporain situe dans la medina.",
     "latitude": 33.289,
@@ -152,18 +152,6 @@
     "longitude": -8.3418,
     "note": 4.8,
     "adresse": "Azemmour",
-    "ville": "Azemmour",
-    "photo_url": null
-  },
-  {
-    "id": 19,
-    "nom": "Eglise Portugaise",
-    "categorie": "monument",
-    "description": "Vestige de la presence portugaise a Azemmour, temoin historique fascinant niche dans les ruelles de la medina.",
-    "latitude": 33.2893,
-    "longitude": -8.3407,
-    "note": null,
-    "adresse": "Medina, Azemmour",
     "ville": "Azemmour",
     "photo_url": null
   },
