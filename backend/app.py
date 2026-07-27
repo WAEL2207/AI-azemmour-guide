@@ -9,12 +9,22 @@ Endpoints :
   POST   /api/classify               ({nom, description} -> categorie predite)
   POST   /api/predict-duration       ({categorie, note, description} -> duree en min)
   POST   /api/itineraire             ({categories: [...]})
+
+En production (voir render.yaml), ce meme process sert aussi le frontend
+React deja compile (frontend/dist/) pour n'avoir qu'un seul service a
+deployer. En dev, le frontend tourne separement via `npm run dev` (Vite,
+port 5173) et proxie /api + /static vers ce serveur Flask (port 5000) -
+voir frontend/vite.config.js.
 """
-from flask import Flask, jsonify, request
+import os
+
+from flask import Flask, jsonify, request, send_from_directory
 
 import ml_service
 
 app = Flask(__name__)
+
+FRONTEND_DIST = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "frontend", "dist")
 
 # ---------------------------------------------------------------------------
 # CORS "maison" (flask-cors n'est pas requis) : autorise le frontend React
@@ -113,6 +123,24 @@ def itineraire():
     if "erreur" in result:
         return jsonify(result), 400
     return jsonify(result)
+
+
+# ---------------------------------------------------------------------------
+# Frontend compile (production uniquement - voir docstring en haut de fichier)
+# ---------------------------------------------------------------------------
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_frontend(path):
+    if not os.path.isdir(FRONTEND_DIST):
+        return jsonify({
+            "erreur": "Frontend non compile. Lance 'npm run build' dans frontend/, "
+                      "ou utilise 'npm run dev' (port 5173) en developpement.",
+        }), 404
+
+    target = os.path.join(FRONTEND_DIST, path)
+    if path and os.path.isfile(target):
+        return send_from_directory(FRONTEND_DIST, path)
+    return send_from_directory(FRONTEND_DIST, "index.html")
 
 
 if __name__ == "__main__":

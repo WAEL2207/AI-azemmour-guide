@@ -20,6 +20,7 @@ droite de l'entete, choix retenu d'une visite a l'autre).
 
 ```
 webapp/
+  render.yaml       config de deploiement Render (voir section "Deploiement")
   backend/          Flask API (Python)
     app.py                 routes HTTP
     ml_service.py          chargement des modeles + logique metier
@@ -88,6 +89,40 @@ Ouvre **http://localhost:5173**. Le frontend appelle l'API via `/api/...` et les
 photos via `/static/...`, que Vite redirige automatiquement vers
 `http://localhost:5000` (voir `vite.config.js`) — donc le backend doit deja
 tourner.
+
+## Deploiement (Render, gratuit)
+
+En production, un seul process Flask sert a la fois l'API et le frontend React
+deja compile (`frontend/dist/`) - pas besoin d'heberger deux services separes.
+`render.yaml` a la racine du repo decrit ce service pour Render.
+
+**Etapes :**
+
+1. Pousse ce repo sur GitHub (Render deploie depuis un repo Git).
+2. Cree un compte gratuit sur [render.com](https://render.com) (pas de carte
+   bancaire requise pour le plan free).
+3. Dashboard Render -> **New** -> **Blueprint** -> selectionne ce repo. Render
+   lit `render.yaml` automatiquement (build : installe les dependances Python
+   + compile le frontend ; start : `gunicorn` sur le port fourni par Render).
+4. Clique **Apply**. Le premier build prend quelques minutes (installe
+   scikit-learn/pandas + build React) ; l'app est ensuite disponible sur une
+   URL publique du type `https://azemmour-guide.onrender.com`, utilisable
+   depuis n'importe quel telephone ou PC, sans rien installer cote visiteur.
+
+**⚠️ Important pour une presentation en direct** : le plan gratuit de Render
+met le service en veille apres 15 minutes d'inactivite ; la requete suivante
+le reveille en 30-60 secondes. Ouvre le lien toi-meme quelques minutes avant
+de presenter pour eviter ce delai devant le jury.
+
+**Tester le mode production en local** (optionnel, avant de deployer) :
+
+```bash
+cd frontend && npm run build && cd ..
+cd backend && python3 app.py
+```
+
+Puis ouvre **http://localhost:5000** directement (plus besoin de Vite/port
+5173 dans ce mode - Flask sert le build React tel quel).
 
 ## Photos
 
