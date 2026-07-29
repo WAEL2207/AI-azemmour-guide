@@ -166,5 +166,17 @@
     "adresse": "Médina, Azemmour",
     "ville": "Azemmour",
     "photo_url": null
+  },
+  {
+    "id": 23,
+    "nom": "Dar Kbira",
+    "categorie": "hotel",
+    "description": "Maison d'hôtes et restaurant avec une terrasse offrant une vue sur l'Oued Oum Er-Rbia.",
+    "latitude": 33.2898598,
+    "longitude": -8.340376,
+    "note": null,
+    "adresse": "Azemmour",
+    "ville": "Azemmour",
+    "photo_url": null
   }
 ]

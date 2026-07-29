@@ -66,6 +66,10 @@ const PLACE_TRANSLATIONS_EN = {
     description:
       "Street art trail through the medina's alleys, a legacy of the mural festival that earned Azemmour its nickname as the city of artists.",
   },
+  23: {
+    nom: "Dar Kbira",
+    description: "Guesthouse and restaurant with a terrace overlooking the Oued Oum Er-Rbia.",
+  },
 };
 
 /**
