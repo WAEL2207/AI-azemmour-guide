@@ -90,7 +90,7 @@
     "description": "Espace d'exposition d'art contemporain situé dans la médina.",
     "latitude": 33.289,
     "longitude": -8.341,
-    "note": null,
+    "note": 3.5,
     "adresse": "Médina, Azemmour",
     "ville": "Azemmour",
     "photo_url": null
@@ -174,7 +174,7 @@
     "description": "Maison d'hôtes et restaurant avec une terrasse offrant une vue sur l'Oued Oum Er-Rbia.",
     "latitude": 33.2898598,
     "longitude": -8.340376,
-    "note": null,
+    "note": 3.5,
     "adresse": "238 Derb Daira, Ancienne Médina, Azemmour",
     "ville": "Azemmour",
     "photo_url": null
