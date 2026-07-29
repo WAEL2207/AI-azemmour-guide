@@ -18,7 +18,7 @@ describe("categories", () => {
   });
 
   it("returns the french label by default", () => {
-    expect(categoryMeta("hotel")).toEqual({ label: "Hotel", color: "var(--cat-hotel)" });
+    expect(categoryMeta("hotel")).toEqual({ label: "Hôtel", color: "var(--cat-hotel)" });
   });
 
   it("returns the english label when asked", () => {
@@ -29,7 +29,7 @@ describe("categories", () => {
   });
 
   it("falls back to french if a translation is somehow missing", () => {
-    expect(categoryMeta("hotel", "de")).toEqual({ label: "Hotel", color: "var(--cat-hotel)" });
+    expect(categoryMeta("hotel", "de")).toEqual({ label: "Hôtel", color: "var(--cat-hotel)" });
   });
 
   it("falls back gracefully for an unknown category", () => {

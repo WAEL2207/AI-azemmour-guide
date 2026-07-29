@@ -195,11 +195,11 @@ def generer_itineraire(categories_choisies):
     """Genere un itineraire optimise pour les lieux d'Azemmour correspondant
     aux categories choisies."""
     if not categories_choisies:
-        return {"erreur": "Au moins une categorie doit etre selectionnee."}
+        return {"erreur": "Au moins une catégorie doit être sélectionnée."}
 
     places = [_with_photo(p) for p in _load_store() if p["categorie"] in categories_choisies]
     if not places:
-        return {"erreur": "Aucun lieu trouve pour ces categories."}
+        return {"erreur": "Aucun lieu trouvé pour ces catégories."}
 
     ordre = _ordonner_plus_proche_voisin(places)
 

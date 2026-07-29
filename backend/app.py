@@ -99,7 +99,7 @@ def predict_duration_route():
     if not categorie:
         return jsonify({"erreur": "Le champ 'categorie' est requis."}), 400
     if categorie not in ml_service.CATEGORIES:
-        return jsonify({"erreur": f"Categorie inconnue. Valeurs possibles : {ml_service.CATEGORIES}"}), 400
+        return jsonify({"erreur": f"Catégorie inconnue. Valeurs possibles : {ml_service.CATEGORIES}"}), 400
 
     duree = ml_service.predict_duration(
         categorie=categorie,
