@@ -14,7 +14,7 @@ const PLACE_TRANSLATIONS_EN = {
       "Gate and ramparts built by the Portuguese between 1513 and 1541, leading into the historic medina and overlooking the river.",
   },
   3: {
-    nom: "Okba Ibn Nafii Mosque",
+    nom: "Kasbah-Ibn Nafii Mosque",
     description: "Old kasbah mosque named after the region's first Muslim governor.",
   },
   4: {
