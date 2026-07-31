@@ -7,7 +7,7 @@ export const STRINGS = {
     subtitle:
       "Découvre les plus beaux lieux de la médina et de ses environs, et compose facilement ton itinéraire de visite idéal.",
     badgeItineraries: "🗺️ Itinéraires sur mesure",
-    badgeAI: "🤖 Recommandations par IA",
+    badgeAI: "🧠 Recommandations par IA",
     badgeLocation: "📍 Azemmour, Maroc",
     navExplorer: "Explorer",
     navItinerary: "Itinéraire",
@@ -39,7 +39,7 @@ export const STRINGS = {
     subtitle:
       "Discover the finest spots in the medina and beyond, and easily build your ideal visit itinerary.",
     badgeItineraries: "🗺️ Tailor-made itineraries",
-    badgeAI: "🤖 AI-powered recommendations",
+    badgeAI: "🧠 AI-powered recommendations",
     badgeLocation: "📍 Azemmour, Morocco",
     navExplorer: "Explore",
     navItinerary: "Itinerary",
